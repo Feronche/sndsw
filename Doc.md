@@ -88,6 +88,37 @@ geo.modules['Scifi'].GetSiPMPosition(detID,A,B)
 Z = A[2]
 ```
 
+## Loop over multiple files 
 
+
+Taken from https://github.com/SND-LHC/sndsw/blob/master/shipLHC/scripts/Monitor.py line 135 - 188
+
+```
+# Set up TChain
+treeName = ""
+eventChain = ROOT.TChain(treeName)
+
+# Add files in the run
+for _file in glob.glob(PATH_PATTERN):
+    eventChain.Add(_file)
+
+# Setup FairANA
+run  = ROOT.FairRunAna()
+ioman = ROOT.FairRootManager.Instance()
+ioman.SetTreeName(eventChain.GetName())
+
+# Def dummy output
+outFile = ROOT.TMemFile('dummy','CREATE')
+
+# Setup files in the run
+source = ROOT.FairFileSource(eventChain.GetCurrentFile())
+for _file in glob.glob(PATH_PATTERN):
+    source.AddFile(_file)
+
+# Add source files and set output sink
+run.SetSource(source)
+sink = ROOT.FairRootFileSink(outFile)
+run.SetSink(sink)
+```
 
 
