@@ -51,8 +51,6 @@ A,B = ROOT.TVector3(),ROOT.TVector3()
 detID = digi.GetDetectorID()
 geo.modules['Scifi'].GetSiPMPosition(detID,A,B) # def in shipLHC/Scifi.cxx
 
-# A and B ==> Left and Right position of a cluster 
-
 
 # Orientation 
 digi.isVertical(): True if `X` else `Y`
@@ -70,6 +68,7 @@ cluster = sndCluster()
 A,B = ROOT.TVector3(),ROOT.TVector3()
 cluster.GetPosition(A,B)
 ```
+A and B ==> Left and Right position of a cluster 
 
 Get Z position 
 
